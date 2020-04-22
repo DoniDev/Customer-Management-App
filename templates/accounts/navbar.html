@@ -1,0 +1,43 @@
+{% load static %}
+<style>
+    .hello-msg{
+        font-size: 18px;
+        color:#fff;
+        padding-right: 20px;
+
+
+    }
+    span a:hover{
+        text-decoration:none;
+        color:#ebeff5;
+    }
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a style="font-size: 25px;text-decoration: none" class="text-muted" href="#">Doniyor</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      {% if request.user.is_staff %}
+      <li class="nav-item active  pl-3">
+        <a class="nav-link "  href="{% url 'home' %}">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'products' %}">Products</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'accounts-settings' %}">Settings</a>
+      </li>
+      {% endif %}
+
+{#      <li class="nav-item">#}
+{#        <a class="nav-link" href="#">Customer</a>#}
+{#      </li>#}
+    </ul>
+  </div>
+  <span class="hello-msg">Hello, {{ request.user.username }}</span>
+  <span><a class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
+
+</nav>
